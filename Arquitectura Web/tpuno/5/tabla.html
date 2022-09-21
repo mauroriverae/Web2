@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC</title>
+</head>
+<body>
+    <form action="tabla.php" method="POST">
+        <input type="text" name="peso" placeholder="ingrese su peso">
+        <input type="text" name="altura" placeholder="ingrese su altura">
+        <input type="submit" >
+    </form>
+    <table>
+        <tr>
+            <th>Bajo peso</th>
+            <td> < 18,5 </td>
+        </tr>
+        <tr>
+            <th>Normal</th>
+            <td> 18,5 - 24,99 </td>
+        </tr>
+        <tr>
+            <th>Sobrepeso</th>
+            <td> > 25,00 </td>
+        </tr>
+        <tr>
+            <th>Obesidad</th>
+            <td> >30,00 </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+*{ font-family: Georgia, 'Times New Roman', Times, serif;}
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 80%;
+    background-color: #fafafa;
+}
+#fomr-login{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.mb-3{
+    margin: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px;
+    align-items: center;
+}
+label{
+    margin: 2px;
+}
+button{
+    background-color: #2b18d8;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+    width: 100px;
+    padding: 8px;
+}
+button:hover{
+    cursor: pointer;
+}
+body{
+    background-color: #2b18d8;
+}
