@@ -34,5 +34,9 @@ include_once 'app/views/task.view.php';
             $id = $this->model->insertTask($titulo, $descripcion, $prioridad);
             header("location: " . BASE_URL);
         }
-    
+        
+        function deleteTask($id) {
+            $this->model->removeTask($id);
+            header("Location: " . BASE_URL);
+        } 
     }

@@ -11,8 +11,8 @@ class TaskModel{
         //preparo la sentencia 
         $query = $db -> prepare('SELECT * FROM tareas');
         $query -> execute();  //con la flechita llamaos a la funcion
-        $task = $query->fetchAll(PDO::FETCH_OBJ); // accedo al objeto de manera mas facil -->
-        return $task;
+        $tasks = $query->fetchAll(PDO::FETCH_OBJ); // accedo al objeto de manera mas facil -->
+        return $tasks;
     }
 
     function insertTask($titulo, $descripcion, $prioridad) {
@@ -23,4 +23,17 @@ class TaskModel{
         return $db->lastInsrtid();
     }
 
+    function removeTask($id) {
+        $db = $this->conectToDb();
+
+        $query = $db->prepare('DELETE FROM tareas WHERE id_tarea = ?');
+        $query->execute($id);
+    }
+    
+  /*   function updateTaskFromDb($id) {
+        $db = conectToDb();
+        $query = $db->prepare("UPDATE  tareas SET finalizada=1 WHERE id_tarea=?");
+        $query->execute([$id]);
+    } */
+    
 }

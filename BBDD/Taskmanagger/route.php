@@ -1,7 +1,5 @@
 <?php
-include_once 'app/controllers/task.controller.php';
-
-include_once 'app/task.php';
+include_once './app/controllers/task.controller.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -27,14 +25,15 @@ switch ($params[0]) {
         break;
     case 'insertar':
         $controller = new TaskController();
-        addTask();
+        $controller->addTask();
         break;
-    case 'delete':
-        // obtengo el parametro de la acción
+    case 'eliminar':
+        $controller = new TaskController();
         $id = $params[1];
-        $taskController->deleteTask($id);
+        $controller->deleteTask($id);
         break;
     default:
+        header("HTTP/1.0 404 Not Found");
         echo('404 Page not found');
         break;
 }
