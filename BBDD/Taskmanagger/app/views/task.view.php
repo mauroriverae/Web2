@@ -1,27 +1,20 @@
 <?php
+
 class TaskView {
 
     function showTasks($tasks) {
-        include 'templates/header.php';
-        include 'templates/form_alta.php';
-
-
-        echo "<ul class='list-group mt-5'>";
+        include './templates/header.php';    
+        include './templates/form_alta.php';
         
-        foreach($tasks as $task){
-            "<li class='list-group-item'>
-                $task->titulo | $task->descripcion
-                <a href='eliminar' class='btn btn-danger btn-sm'>Eliminar</a>
-            </li>";
+        echo '<ul class="list-group">';
+        foreach ($tasks as $task) {
+           echo "<li class='list-group-item d-flex justify-content-between align-items-center'>
+                    <span> <b>$task->titulo</b> - $task->descripcion (prioridad $task->prioridad) </span>
+                    <a href='delete/$task->id_tarea' type='button' class='btn btn-danger ml-auto'>Borrar</a>
+                </li>";
         }
         echo "</ul>";
-
-        include 'templates/footer.php';
-    }
-
-    function showError($msg) {
-        echo "<h1>Error!</h1>";
-        echo "<h2>$msg/h2>";
+    
+        include './templates/footer.php';
     }
 }
-

@@ -1,39 +1,48 @@
 <?php
-class TaskModel{
-    private function conectToDb(){
-        //me conecto a la DB
-        $db = new PDO('mysql:host=localhost;'.'dbname=db_tasks;charset=utf8', 'root', ''); //queryString trae el nombre de la bd, host, nombre, etc
-        return $db;
+
+class TaskModel {
+
+    private $db;
+
+    public function __construct() {
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_tasks;charset=utf8', 'root', '');
     }
 
-    function getTasks() {
-        $db =  $this->conectToDb();
-        //preparo la sentencia 
-        $query = $db -> prepare('SELECT * FROM tareas');
-        $query -> execute();  //con la flechita llamaos a la funcion
-        $tasks = $query->fetchAll(PDO::FETCH_OBJ); // accedo al objeto de manera mas facil -->
+    /**
+     * Devuelve la lista de tareas completa.
+     */
+    public function getAllTasks() {
+        // 1. abro conexión a la DB
+        // ya esta abierta por el constructor de la clase
+
+        // 2. ejecuto la sentencia (2 subpasos)
+        $query = $this->db->prepare("SELECT * FROM tareas");
+        $query->execute();
+
+        // 3. obtengo los resultados
+        $tasks = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
+        
         return $tasks;
     }
 
-    function insertTask($titulo, $descripcion, $prioridad) {
-        $db = $this->conectToDb();
-        $query = $db->prepare("INSERT INTO tareas(titulo, descripcion, prioridad) VALUES (?, ?, ?)"); //pido los dato que van a ser insertados
-        //4 signos de preguntas igual a 4 preguntas en todos los lugar, si pongo mas o mens tira error
-        $query->execute(array($mermelada, $descripcion, $prioridad)); //ejecute la sentencia
-        return $db->lastInsrtid();
+    /**
+     * Inserta una tarea en la base de datos.
+     */
+    public function insertTask($title, $description, $priority) {
+        $query = $this->db->prepare("INSERT INTO tareas (titulo, descripcion, prioridad, finalizada) VALUES (?, ?, ?, ?)");
+        $query->execute([$title, $description, $priority, false]);
+
+        return $this->db->lastInsertId();
     }
 
-    function removeTask($id) {
-        $db = $this->conectToDb();
 
-        $query = $db->prepare('DELETE FROM tareas WHERE id_tarea = ?');
-        $query->execute($id);
-    }
-    
-  /*   function updateTaskFromDb($id) {
-        $db = conectToDb();
-        $query = $db->prepare("UPDATE  tareas SET finalizada=1 WHERE id_tarea=?");
+    /**
+     * Elimina una tarea dado su id.
+     */
+    function deleteTaskById($id) {
+        $query = $this->db->prepare('DELETE FROM tareas WHERE id_tarea = ?');
         $query->execute([$id]);
-    } */
-    
+    }
+
 }
+
