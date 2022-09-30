@@ -10,7 +10,16 @@
        ';
     }
 
-    renderForm();
+    //session open
+    session_start();
+
+    // reviso si esta logg ! else muestro login
+    if(isset($_SESSION['logueado']) && $_SESSION['logueado'] ==true){
+        echo "Bienvenido  " . $_SESSION['username'];
+    } else {
+        renderForm();
+    }
+    
 
     if(!empty($_POST['email'])&& !empty($_POST['password'])){
         $userEmail= $_POST['email'];
@@ -21,7 +30,9 @@
         $query->execute([$userEmail]);
         $user = $query->fetch(PDO::FETCH_OBJ);
         
-        if($user && $userPassword == ($user->password)){
+        if($user && password_verify($userPassword, $user->password)){
+            $_SESSION['logueado']= true;
+            $_SESSION['username'] = $userEmail;
             echo "acceso exitoso";
         } else {
             echo "acceso denegado";

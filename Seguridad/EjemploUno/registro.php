@@ -15,8 +15,8 @@
 
     if(!empty($_POST['email'])&& !empty($_POST['password'])){
         $userEmail= $_POST['email'];
-        $userPassword = $_POST['password'];
-
+        $userPassword = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+        
         $db = new PDO('mysql:host=localhost;'.'dbname=hashing;charset=utf8','root','');
         $query= $db->prepare('INSERT INTO users(email, password)VALUES(?, ?)');
         $query->execute([$userEmail, $userPassword]);
