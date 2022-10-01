@@ -33,4 +33,9 @@ class TaskController {
         $this->model->deleteTaskById($id);
         header("Location: " . BASE_URL);
     }
+    
+    function updateTask($id) {
+        $this->model->updateTaskFromDB($id);
+        header("Location: " . BASE_URL);
+    }
 }

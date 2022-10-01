@@ -1,8 +1,22 @@
-{foreach from=$tasks item=$task }    
-    <ul>
-        <li class='list-group-item d-flex justify-content-between align-items-center'>
+{include file="templates/header.tpl" }
+{include file="templates/form_alta.tpl" }
+<div class="container">
+    <ul class="list-group">
+    {foreach from=$tasks item=$task }    
+        <li class="
+            list-group-item d-flex justify-content-between 
+            {if $task->finalizada} finalizada {/if}
+        ">
             <span> <b>{$task->titulo}</b> - {$task->descripcion }(prioridad {$task->prioridad}) </span>
-            <a href='delete/$task->id_tarea' type='button' class='btn btn-danger ml-auto'>Borrar</a>
+            <div>
+            <a href="delete/{$task->id_tarea}" type='button' class='btn btn-danger'>Borrar</a>
+            {if !$task->finalizada}
+                <a href="update/{$task->id_tarea}" type='button' class='btn btn-success'>Finalizar</a>
+            {/if}
+            </div>
         </li>
+    {/foreach}
     </ul>
-{/foreach}
+</div>
+
+{include file="templates/footer.tpl" }

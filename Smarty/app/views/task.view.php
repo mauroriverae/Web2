@@ -5,17 +5,20 @@ class TaskView {
     private $smarty;
 
     function __construct() {
+        //en nuestra arquitectura no existe una vista sin smarty
         $this->smarty = new Smarty();
     }
 
     function showTasks($tasks) {
-        /* include './templates/header.php';    
-        include './templates/form_alta.php'; */
-        
-        $this->smarty->assign("tasks", $tasks);
-        /* $smarty->display('templates/lista.tpl');
-        $smarty->display('templates/header.tpl'); */
-        $this->smarty->display('templates/lista.tpl');
 
+        //asigno las tareas
+        $this->smarty->assign("tasks", $tasks);
+        //renderizo
+        $this->smarty->display('templates/lista.tpl');
+     
+    }
+
+    function showHomeLocation(){
+        header("location: " .BASE_URL."home");
     }
 }
