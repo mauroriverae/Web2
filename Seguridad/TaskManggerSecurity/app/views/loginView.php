@@ -9,9 +9,14 @@
             $this->smarty = new Smarty();
         }
 
-        function showLogin() {
+        function showLogin($error = "") {
             $this->smarty->assign("titulo", 'Log In');
+            $this->smarty->assign("error", $error);
             $this->smarty->display('templates/login.tpl');
         
+        }
+
+        function showTask(){
+            header("Location: " .BASE_URL."home");
         }
     }

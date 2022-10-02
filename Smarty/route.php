@@ -14,7 +14,6 @@ $params = explode('/', $action);
 // instancio el unico controller que existe por ahora
 $taskController = new TaskController();
 
-
 // tabla de ruteo
 switch ($params[0]) {
     case 'home':
