@@ -14,7 +14,6 @@ class TaskModel {
     public function getAllTasks() {
         // 1. abro conexión a la DB
         // ya esta abierta por el constructor de la clase
-
         // 2. ejecuto la sentencia (2 subpasos)
         $query = $this->db->prepare("SELECT * FROM tareas");
         $query->execute();
@@ -34,8 +33,6 @@ class TaskModel {
 
         return $this->db->lastInsertId();
     }
-
-
     /**
      * Elimina una tarea dado su id.
      */
@@ -43,6 +40,12 @@ class TaskModel {
         $query = $this->db->prepare('DELETE FROM tareas WHERE id_tarea = ?');
         $query->execute([$id]);
     }
+
+    function updateTaskFromDB($id){
+        $query = $this->db->prepare("UPDATE tareas SET finalizada=1 WHERE id_tarea=?");
+        $query->execute(array($id));
+    }
+
 
 }
 

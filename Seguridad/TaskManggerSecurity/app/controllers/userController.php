@@ -1,8 +1,8 @@
 <?php
-    require_once './app/models/userModel.php';
-    require_once './app/views/loginView.php';
+require_once './app/models/userModel.php';
+require_once './app/views/loginView.php';
 
- class UserContreller {
+class UserController {
     private $model;
     private $view;
 
@@ -12,6 +12,7 @@
     }
 
     function login(){
-        $this->view-> showLogin();
+        $this->view->showLogin();
     }
- }
+
+}
